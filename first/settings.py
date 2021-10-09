@@ -1,6 +1,7 @@
 import os
 import django_heroku
 import environ
+import dj_database_url
 environ.Env.read_env()
 
 from pathlib import Path
@@ -18,7 +19,7 @@ SECRET_KEY = os.environ['secret_key']
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = False
 
-ALLOWED_HOSTS = ['*']
+ALLOWED_HOSTS = ['0.0.0.0', 'localhost', '127.0.0.1', 'dhfirst.herokuapp.com']
 
 
 # Application definition
@@ -30,6 +31,7 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+    'whitenoise.runserver_nostatic',
 ]
 
 MIDDLEWARE = [
@@ -116,9 +118,15 @@ STATIC_URL = '/static/'
 PROJECT_ROOT = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 STATIC_ROOT  =   os.path.join(PROJECT_ROOT, 'staticfiles')
 
+STATICFILES_DIRS = (
+    os.path.join(BASE_DIR, 'static'),
+)
+
 STATICFILES_STORAGE = 'whitenoise.storage.CompressedManifestStaticFilesStorage'
+
+MEDIA_ROOT = os.path.join(BASE_DIR,'media')
+MEDIA_URL = '/media/'
 
 django_heroku.settings(locals())
 
-import dj_database_url
 DATABASES['default'] = dj_database_url.config(conn_max_age=600, ssl_require=True)

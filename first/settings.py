@@ -27,6 +27,7 @@ ALLOWED_HOSTS = ['0.0.0.0', 'localhost', '127.0.0.1', 'dhfirst.herokuapp.com']
 # Application definition
 
 INSTALLED_APPS = [
+    'hello.apps.HelloConfig',
     'django.contrib.admin',
     'django.contrib.auth',
     'django.contrib.contenttypes',

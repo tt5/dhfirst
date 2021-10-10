@@ -2,13 +2,10 @@ from django.shortcuts import render
 from .models import MyString
 
 def index(request):
-    objects = MyString.objects.all().delete()
-    newString = MyString(mystring = "huhu")
+    strings = MyString.objects.all().delete()
+    newString = MyString(mystring = "hu1")
     newString.save()
-    objects = MyString.objects.all()
-    res="res: "
-    for elt in objects:
-        res += "( " + elt.mystring + " )"
-    someString = res
-    context = {'string': someString}
-    return render(request, 'hello/index.html', context)
+    newString = MyString(mystring = "hu2")
+    newString.save()
+    strings = MyString.objects.all()
+    return render(request, 'hello/index.html', {'strings': strings})

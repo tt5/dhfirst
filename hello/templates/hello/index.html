@@ -1,11 +1,17 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <title></title>
-</head>
-<body>
-    <h1>hello</h1>
-    <p>{{ string }}</p>
-</body>
-</html>
+{% extends "base.html" %}
+{% block content %}
+
+<h1>hello</h1>
+{% for string in strings %}
+<div class="{% cycle 'white' 'gray' %}">
+    {{ string.mystring }}
+</div>
+{% empty %}
+    <div>
+        There are no strings yet.
+    </div>
+{% endfor %}
+
+{% lorem 2 p random %}
+
+{% endblock content %}

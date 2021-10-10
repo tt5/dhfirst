@@ -77,8 +77,12 @@ WSGI_APPLICATION = 'first.wsgi.application'
 
 #DATABASES = {
 #    'default': {
-#        'ENGINE': 'django.db.backends.sqlite3',
-#        'NAME': BASE_DIR / 'db.sqlite3',
+#        'ENGINE': 'django.db.backends.postgresql_psycop2',
+#        'NAME': os.environ['db_name']
+#        'USER': os.environ['db_user']
+#        'PASSWORD': os.environ['db_password']
+#        'HOST': 'localhost',
+#        'PORT': '',
 #    }
 #}
 
@@ -133,3 +137,6 @@ MEDIA_URL = '/media/'
 django_heroku.settings(locals())
 
 DATABASES['default'] = dj_database_url.config(conn_max_age=600, ssl_require=True)
+
+if os.environ.get('DATABASE_URL'):
+    DATABASES['default'] = dj_database_url.config(default=os.environ['DATABASE_URL'])
